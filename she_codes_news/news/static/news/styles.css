@@ -84,3 +84,44 @@
     margin: 0 0 10px 10px;
     width: 50%;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin: auto;
+}
+
+form p {
+    display: flex;
+}
+
+form p label {
+    flex-basis: 20%;
+}
+
+form p input {
+    height: 1.5rem;
+}
+
+form p input, form p textarea {
+    flex-basis: 80%;
+    outline: none;
+    border: 1.5px #aaa solid;
+}
+
+form p input:focus, form p textarea:focus {
+    border: 1.5px rgb(18, 199, 190) solid;
+}
+
+form input[type=submit] {
+    width: 100px;
+    align-self: flex-end;
+    padding: 10px;
+}
+
+form input[type=submit]:hover {
+    background-color: rgb(18, 199, 190);
+    border-color: rgb(18, 199, 190);
+    box-shadow: none;
+}
