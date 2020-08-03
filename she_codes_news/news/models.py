@@ -6,6 +6,7 @@ class NewsStory(models.Model):
     author = models.CharField(max_length=200)
     pub_date = models.DateTimeField()
     content = models.TextField()
+    image = models.URLField()
 
     def __str__(self):
-        return NewsStory.title
+        return str(self.title)

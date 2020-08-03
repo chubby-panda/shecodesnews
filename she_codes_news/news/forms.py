@@ -5,7 +5,7 @@ from .models import NewsStory
 class StoryForm(ModelForm):
     class Meta:
         model = NewsStory
-        fields = ['title', 'author', 'pub_date', 'content']
+        fields = ['title', 'author', 'pub_date', 'image', 'content']
         widgets = {
             'pub_date': forms.DateInput (
                 format = ('%m/%d/%Y'),
@@ -14,27 +14,7 @@ class StoryForm(ModelForm):
                     'placeholder': 'Select a date',
                     'type': 'date'
                 }
-            ),
-            'title': forms.TextInput (
-                attrs={
-                    'class' : 'form-title'
-                }
-            ),
-            'author': forms.TextInput (
-                attrs={
-                    'class' : 'form-author'
-                }
-            ),
-            'pub_date': forms.TextInput (
-                attrs={
-                    'class' : 'form-pub_date'
-                }
-            ),
-            'content': forms.Textarea (
-                attrs={
-                    'class' : 'form-content'
-                }
-            ),
+            )
         }
 
             # 'category': forms.ChoiceField (

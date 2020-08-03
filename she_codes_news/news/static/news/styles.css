@@ -60,7 +60,7 @@
 #story-card-3 img,
 #story-card-4 img {
     width: 33%;
-    height: 100%;
+    height: auto;
     margin-right: 5px;
 }
 
@@ -81,8 +81,8 @@
 
 #story-content img {
     float: right;
-    margin: 0 0 10px 10px;
-    width: 50%;
+    margin: 0 30px;
+    width: 40%;
 }
 
 form {
@@ -107,17 +107,21 @@ form p input {
 form p input, form p textarea {
     flex-basis: 80%;
     outline: none;
-    border: 1.5px #aaa solid;
+    border: 1px #aaa solid;
 }
 
 form p input:focus, form p textarea:focus {
-    border: 1.5px rgb(18, 199, 190) solid;
+    border: 1px rgb(18, 199, 190) solid;
 }
 
 form input[type=submit] {
     width: 100px;
     align-self: flex-end;
     padding: 10px;
+    box-shadow: none;
+    outline: none;
+    border: 1px grey solid;
+    border-radius: 5px;
 }
 
 form input[type=submit]:hover {
