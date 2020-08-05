@@ -110,6 +110,11 @@ form p input, form p textarea {
     border: 1px #aaa solid;
 }
 
+form p input#id_pub_date_0,
+form p input#id_pub_date_1 {
+    flex-basis: 40%;
+}
+
 form p input:focus, form p textarea:focus {
     border: 1px rgb(18, 199, 190) solid;
 }

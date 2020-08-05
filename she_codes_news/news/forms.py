@@ -1,11 +1,19 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, SplitDateTimeField, SplitDateTimeWidget
+
 from .models import NewsStory
 
 class StoryForm(ModelForm):
+    pub_date = SplitDateTimeField(
+        widget=SplitDateTimeWidget(
+            date_attrs={'type': 'date'},
+            time_attrs={'type': 'time'},
+        )
+    )
     class Meta:
         model = NewsStory
-        fields = ['title', 'author', 'pub_date', 'image', 'content']
+        fields = ['title', 'pub_date', 'image', 'content']
+        labels = {'image': "Image URL"}
         widgets = {
             'pub_date': forms.DateInput (
                 format = ('%m/%d/%Y'),
