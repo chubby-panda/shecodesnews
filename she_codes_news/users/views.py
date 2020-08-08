@@ -13,9 +13,5 @@ class CreateAccountView(CreateView):
     template_name = 'users/createAccount.html'
 
 
-class AccountDetailView(generic.TemplateView):
-    template_name = 'users/account.html'
-
-
 class AuthorView(generic.DetailView):
     model = CustomUser

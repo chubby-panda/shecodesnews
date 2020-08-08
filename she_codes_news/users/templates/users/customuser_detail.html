@@ -7,6 +7,8 @@
 
 {% block content %}
 <div class="container">
+    <h2>{{ object.username }}'s Profile</h2>
+    <p>Email: {{ object.email }}</p>
     {% if object %}
         <h2>{{ object.get_full_name|default:object.username }}'s Stories</h2>
         {% for story in object.stories.all %}
