@@ -2,14 +2,15 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import CreateAccountView, AccountDetailView
+from . import views
 
 
 app_name = 'users'
 
 urlpatterns = [
-    path('create-account/', CreateAccountView.as_view(), name='createAccount'),
-    path('account/', AccountDetailView.as_view(), name='account-detail'),
+    path('create-account/', views.CreateAccountView.as_view(), name='createAccount'),
+    path('account/', views.AccountDetailView.as_view(), name='account-detail'),
+    path('author/<int:pk>/', views.AuthorView.as_view(), name='author-detail'),
 ]
 
 if settings.DEBUG:

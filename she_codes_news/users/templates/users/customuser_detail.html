@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% if object %}
+        <h2>{{ object.get_full_name|default:object.username }}'s Stories</h2>
+        {% for story in object.stories.all %}
+        {{ story }}
+        {% endfor %}
+    {% else %}
+        <p>This author has not written any stories yet. Tsk tsk tsk.</p>
+    {% endif %}
+</div>
+{% endblock %}
