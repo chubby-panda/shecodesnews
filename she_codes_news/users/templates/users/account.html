@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% if user.is_authenticated %}
+        <h2>Your Profile</h2>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+    {% else %}
+        <p>You need to log in.</p>
+    {% endif %}
+</div>
+{% endblock %}
