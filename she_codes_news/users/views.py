@@ -19,5 +19,3 @@ class AccountDetailView(generic.TemplateView):
 
 class AuthorView(generic.DetailView):
     model = CustomUser
-    
-    
