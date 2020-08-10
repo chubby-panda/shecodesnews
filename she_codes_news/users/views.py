@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -21,7 +22,8 @@ class AuthorView(generic.DetailView):
     model = CustomUser
 
 
-class UpdateAccountView(generic.UpdateView):
+class UpdateAccountView(LoginRequiredMixin, generic.UpdateView):
+    login_url = 'users/login/'
     model = CustomUser
     fields = ['password', 'email', 'bio', 'profile_img']
     template_name = 'users/customuser_update.html'
@@ -31,14 +33,14 @@ class UpdateAccountView(generic.UpdateView):
         success_url = reverse_lazy('users:author-detail', kwargs={'pk': author_id})
         return success_url
 
-def change_password(request, pk):
+def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
+            return redirect('users:change-password')
         else:
             messages.error(request, 'Please correct the error below.')
     else:

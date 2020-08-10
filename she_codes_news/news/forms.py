@@ -8,7 +8,8 @@ class StoryForm(ModelForm):
         widget=SplitDateTimeWidget(
             date_attrs={'type': 'date'},
             time_attrs={'type': 'time'},
-        )
+        ),
+        label="Publication Date"
     )
     class Meta:
         model = NewsStory
