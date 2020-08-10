@@ -10,6 +10,12 @@
     object-fit: cover;
 }
 
+.profile-img {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+}
+
 #latest-stories {
     display: grid;
     grid-template-columns: 2fr 1fr;

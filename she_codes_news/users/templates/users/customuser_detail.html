@@ -8,7 +8,10 @@
 {% block content %}
 <div class="container">
     <h2>{{ object.username }}'s Profile</h2>
+    <img class="profile-img" src="{{ object.profile_img.url }}" alt="Profile Image">
     <p>Email: {{ object.email }}</p>
+    <h4>About {{ object.username }}:</h4>
+    <p>{{ object.bio }}</p>
     {% if object %}
         <h2>{{ object.get_full_name|default:object.username }}'s Stories</h2>
         {% for story in object.stories.all %}
