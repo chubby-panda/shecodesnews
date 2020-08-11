@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm, SplitDateTimeField, SplitDateTimeWidget
 
-from .models import NewsStory
+from .models import NewsStory, Category
 
 class StoryForm(ModelForm):
     pub_date = SplitDateTimeField(
@@ -13,17 +13,21 @@ class StoryForm(ModelForm):
     )
     class Meta:
         model = NewsStory
-        fields = ['title', 'pub_date', 'image', 'content']
+        fields = ['title', 'pub_date', 'image', 'story_category', 'content']
         labels = {'image': "Image URL"}
         widgets = {
-            'pub_date': forms.DateInput (
+            'pub_date': forms.DateInput(
                 format = ('%m/%d/%Y'),
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Select a date',
                     'type': 'date'
                 }
-            )
+            ),
+            'category': forms.ModelMultipleChoiceField(
+                widget = forms.SelectMultiple,
+                queryset = Category.objects.all()
+            ),
         }
 
             # 'category': forms.ChoiceField (

@@ -13,6 +13,9 @@
     {% endif %}
     <h2>{{ story.title }}</h2>
     <h4>{{ story.author }}</h4>
+    {% for category in story.story_category.all %}
+    <small>{{ category }}</small>
+    {% endfor %}
     <div id="story-content">
         <img src="{{ story.image }}">
         {{ story.content|linebreaks }}

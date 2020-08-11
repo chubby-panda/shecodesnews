@@ -5,6 +5,9 @@
             <h3>{{ story.title }}</h3>
             <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
             <h4>{{ story.pub_date }}</h4>
+            {% for category in story.story_category.all %}
+            <small>{{ category }}</small>
+            {% endfor %}
         </div>
     </a>
 </div>

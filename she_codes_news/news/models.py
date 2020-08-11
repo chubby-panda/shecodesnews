@@ -1,6 +1,17 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.template.defaultfilters import slugify 
+
+
+class Category(models.Model):
+    category = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ['category']
+    
+    def __str__(self):
+        return self.category
 
 
 class NewsStory(models.Model):
@@ -13,6 +24,7 @@ class NewsStory(models.Model):
     pub_date = models.DateTimeField()
     content = models.TextField()
     image = models.URLField()
+    story_category = models.ManyToManyField(Category)
     slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
