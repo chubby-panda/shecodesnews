@@ -1,6 +1,6 @@
 from django.views import generic
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import NewsStory
 from .forms import StoryForm
 
@@ -22,10 +22,11 @@ class IndexView(generic.ListView):
     template_name = 'news/index.html'
 
     def get_queryset(self):
-        '''Return all news stories.'''
+        """Return all news stories."""
         return NewsStory.objects.all()
 
     def get_context_data(self, **kwargs):
+        """Filter the stories in the queryset to get only the latest five."""
         context = super().get_context_data(**kwargs)
         context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
         context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')
@@ -38,7 +39,7 @@ class StoryView(generic.DetailView):
     context_object_name = 'story'
 
 
-class UpdateStoryView(LoginRequiredMixin, generic.UpdateView):
+class UpdateStoryView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     login_url = 'users/login/'
     model = NewsStory
     form_class = StoryForm
@@ -46,6 +47,21 @@ class UpdateStoryView(LoginRequiredMixin, generic.UpdateView):
     template_name = 'news/updateStory.html'
 
     def get_success_url(self):
+        """Get the story_id from the request object to pass to the success url"""
         story_id = self.kwargs['pk']
         success_url = reverse_lazy('news:story', kwargs={'pk': story_id})
         return success_url
+
+    def test_func(self):
+        """Only let the user access this page if they are the author of the object being updated"""
+        return self.get_object().author == self.request.user
+
+class DeleteStoryView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    login_url = 'users/login/'
+    model = NewsStory
+    template_name = 'news/deleteStory.html'
+    success_url = reverse_lazy('news:index')
+    
+    def test_func(self):
+        """Only let the user access this page if they are the author of the object being deleted"""
+        return self.get_object().author == self.request.user

@@ -8,6 +8,10 @@
 {% block content %}
 <div class="container">
     <h2>{{ object.username }}'s Profile</h2>
+    {% if user.is_authenticated and user == object %}
+    <a href="{% url 'users:author-update' user.id %}">Edit profile information</a>
+    <a href="{% url 'users:change-password' %}">Change your password</a>
+    {% endif %}
     <img class="profile-img" src="{{ object.profile_img.url }}" alt="Profile Image">
     <p>Email: {{ object.email }}</p>
     <h4>About {{ object.username }}:</h4>
