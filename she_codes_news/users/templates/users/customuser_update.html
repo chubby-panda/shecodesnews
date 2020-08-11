@@ -9,7 +9,7 @@
 <div class="container">
     <h2>Edit Account</h2>
 
-    <a href="{% url 'users:author-detail' user.id %}">Back to profile</a>
+    <a href="{% url 'users:author-detail' user.slug %}">Back to profile</a>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}

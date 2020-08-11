@@ -8,8 +8,8 @@
 {% block content %}
 <div id="story-wrapper">
     {% if user.is_authenticated and user == story.author %}
-    <a href="{% url 'news:edit-story' story.id %}">Edit</a>
-    <a href="{% url 'news:delete-story' story.id %}">Delete</a>
+    <a href="{% url 'news:edit-story' story.slug %}">Edit</a>
+    <a href="{% url 'news:delete-story' story.slug %}">Delete</a>
     {% endif %}
     <h2>{{ story.title }}</h2>
     <h4>{{ story.author }}</h4>

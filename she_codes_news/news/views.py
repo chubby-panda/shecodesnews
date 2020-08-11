@@ -48,8 +48,8 @@ class UpdateStoryView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateVie
 
     def get_success_url(self):
         """Get the story_id from the request object to pass to the success url"""
-        story_id = self.kwargs['pk']
-        success_url = reverse_lazy('news:story', kwargs={'pk': story_id})
+        slug = self.kwargs['slug']
+        success_url = reverse_lazy('news:story', kwargs={'slug': slug})
         return success_url
 
     def test_func(self):

@@ -7,10 +7,19 @@
 
 {% block content %}
 <div class="container">
+
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
     <h2>{{ object.username }}'s Profile</h2>
     {% if user.is_authenticated and user == object %}
-    <a href="{% url 'users:author-update' user.id %}">Edit profile information</a>
-    <a href="{% url 'users:change-password' %}">Change your password</a>
+    <a href="{% url 'users:author-update' user.slug %}">Edit profile information</a>
+    <a href="{% url 'users:change-password' user.slug %}">Change your password</a>
     {% endif %}
     <img class="profile-img" src="{{ object.profile_img.url }}" alt="Profile Image">
     <p>Email: {{ object.email }}</p>
@@ -20,11 +29,11 @@
         <h2>{{ object.get_full_name|default:object.username }}'s Stories</h2>
         {% for story in object.stories.all %}
         <div class="story-card" id="story-card-{{ position }}">
-            <a href="{% url 'news:story' story.id %}">
+            <a href="{% url 'news:story' story.slug %}">
                 <img src="{{ story.image }}" alt="{{ story.title }}">
                 <div class="story-card-text">
                     <h3>{{ story.title }}</h3>
-                    <h4><a href="{% url 'users:author-detail' story.author.id %}">{{ story.author }}</a></h4>
+                    <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
                     <h4>{{ story.pub_date }}</h4>
                 </div>
             </a>

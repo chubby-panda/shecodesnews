@@ -1,9 +1,9 @@
 <div class="story-card" id="story-card-{{ position }}">
-    <a href="{% url 'news:story' story.id %}">
+    <a href="{% url 'news:story' story.slug %}">
         <img src="{{ story.image }}" alt="{{ story.title }}">
         <div class="story-card-text">
             <h3>{{ story.title }}</h3>
-            <h4><a href="{% url 'users:author-detail' story.author.id %}">{{ story.author }}</a></h4>
+            <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
             <h4>{{ story.pub_date }}</h4>
         </div>
     </a>

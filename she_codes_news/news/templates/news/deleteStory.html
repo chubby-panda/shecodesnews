@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'news:story' object.id %}">Quit and return to story.</a>
+<a href="{% url 'news:story' object.slug %}">Quit and return to story.</a>
 <h2>Delete Story</h2>
 
 <form method="post">{% csrf_token %}
