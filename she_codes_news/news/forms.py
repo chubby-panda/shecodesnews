@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 from django.forms import ModelForm, SplitDateTimeField, SplitDateTimeWidget
 
 from .models import NewsStory, Category
@@ -9,7 +10,7 @@ class StoryForm(ModelForm):
             date_attrs={'type': 'date'},
             time_attrs={'type': 'time'},
         ),
-        label="Publication Date"
+        label="Published on"
     )
     class Meta:
         model = NewsStory
@@ -30,16 +31,31 @@ class StoryForm(ModelForm):
             ),
         }
 
-            # 'category': forms.ChoiceField (
-            #     choices = [
-            #         ('review', 'Review'),
-            #         ('lifestyle', 'Lifestyle'),
-            #         ('domestic', 'Domestic News'),
-            #         ('international', 'International News')
-            #     ],
-            #     attrs = {
-            #         'class': 'form-control',
-            #         'placeholder': 'Select a category',
-            #         'type': 'select',
-            #     }
-            # )
+
+class UpdateStoryForm(ModelForm):
+    mod_date = SplitDateTimeField(
+        widget=SplitDateTimeWidget(
+            date_attrs={'type': 'date'},
+            time_attrs={'type': 'time'},
+        ),
+        label="Last modified on",
+    )
+    class Meta:
+        model = NewsStory
+        fields = ['title', 'mod_date', 'image', 'story_category', 'content']
+        labels = {'image': "Image URL"}
+        widgets = {
+            'mod_date': forms.DateInput(
+                format = ('%m/%d/%Y'),
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Select a date',
+                    'type': 'date',
+                }
+            ),
+            'category': forms.ModelMultipleChoiceField(
+                widget = forms.SelectMultiple,
+                queryset = Category.objects.all()
+            ),
+        }
+

@@ -13,6 +13,12 @@
     {% endif %}
     <h2>{{ story.title }}</h2>
     <h4>{{ story.author }}</h4>
+    {% if story.mod_date %}
+    <p>Originally published on {{ story.pub_date }}</p>
+    <p>Last updated on {{ story.mod_date }}</p>
+    {% else %}
+    <p>Published on {{ story.pub_date }}</p>
+    {% endif %}
     {% for category in story.story_category.all %}
     <small><a href="{% url 'news:category-detail' category.slug %}">{{ category }}</a></small>
     {% endfor %}

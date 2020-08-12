@@ -2,7 +2,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import NewsStory, Category
-from .forms import StoryForm
+from .forms import StoryForm, UpdateStoryForm
 
 
 
@@ -46,7 +46,7 @@ class CategoryView(generic.DetailView):
 class UpdateStoryView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     login_url = 'users/login/'
     model = NewsStory
-    form_class = StoryForm
+    form_class = UpdateStoryForm
     context_object_name = 'storyForm'
     template_name = 'news/updateStory.html'
 

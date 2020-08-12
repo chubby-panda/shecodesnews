@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.template.defaultfilters import slugify 
@@ -10,6 +11,7 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['category']
+        verbose_name_plural = "categories"
     
     def __str__(self):
         return self.category
@@ -31,10 +33,14 @@ class NewsStory(models.Model):
         related_name='stories'
     )
     pub_date = models.DateTimeField()
+    mod_date = models.DateTimeField(blank=True, null=True)
     content = models.TextField()
-    image = models.URLField()
+    image = models.ImageField(upload_to='images', null=True, blank=True)
     story_category = models.ManyToManyField(Category, related_name='stories')
     slug = models.SlugField(null=False, unique=True)
+
+    class Meta:
+        verbose_name_plural = "news stories"
 
     def __str__(self):
         return str(self.title)

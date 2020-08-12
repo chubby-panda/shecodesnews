@@ -117,7 +117,9 @@ form p input, form p textarea {
 }
 
 form p input#id_pub_date_0,
-form p input#id_pub_date_1 {
+form p input#id_pub_date_1,
+form p input#id_mod_date_0,
+form p input#id_mod_date_1 {
     flex-basis: 40%;
 }
 

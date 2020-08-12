@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewsStory
+from .models import NewsStory, Category
 
 
 class StoryAdmin(admin.ModelAdmin):
@@ -7,3 +7,4 @@ class StoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(NewsStory, StoryAdmin)
+admin.site.register(Category)

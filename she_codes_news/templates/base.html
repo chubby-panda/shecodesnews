@@ -15,12 +15,18 @@
 
     <body>
         <header>
-            <div id="header-text">
-                <a id="header-link" href="{% url 'news:index' %}">
-                    <h1>She {Codes} News</h1>
-                </a>
+            <div id="header-container-top">
+                <div id="header-text">
+                    <a id="header-link" href="{% url 'news:index' %}">
+                        <img class="header-logo" src="{% static 'she_codes_news/SheCodesNews_LOGO.png' %}" alt="She {Codes} News">
+                    </a>
+                </div>
+                {% include './nav.html' %}
             </div>
-            {% include './nav.html' %}
+            <div id="header-container-bottom">
+                <h1 id="page-heading">She {Codes} News</h1>
+                <p id="page-subheading">Find out all the latest news in the She Codes community!</p>
+            </div>
         </header>
 
         {% block content %}{% endblock %}

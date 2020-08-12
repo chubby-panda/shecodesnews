@@ -8,9 +8,8 @@
 {% block content %}
 <h2>Write a Story</h2>
 
-<form id="form-container" action="" method="post">
+<form id="form-container" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <!-- This renders the form -->
     {{ form.as_p }}
     <input type="submit" value="SUBMIT">
 </form>

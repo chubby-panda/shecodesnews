@@ -1,6 +1,10 @@
 <div class="story-card" id="story-card-{{ position }}">
     <a href="{% url 'news:story' story.slug %}">
-        <img src="{{ story.image }}" alt="{{ story.title }}">
+        {% if story.image %}
+        <img src="{{ story.image.url }}" alt="{{ story.title }}">
+        {% else %}
+        <img src="../media/default-story.jpeg" alt="{{ story.title }}">
+        {% endif %}
         <div class="story-card-text">
             <h3>{{ story.title }}</h3>
             <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
