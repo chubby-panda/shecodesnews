@@ -6,12 +6,21 @@ from django.template.defaultfilters import slugify
 
 class Category(models.Model):
     category = models.CharField(max_length=100)
+    slug = models.SlugField(null=False, unique=True)
 
     class Meta:
         ordering = ['category']
     
     def __str__(self):
         return self.category
+
+    def get_absolute_url(self):
+        return reverse('news:category-detail', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
 
 class NewsStory(models.Model):
@@ -24,7 +33,7 @@ class NewsStory(models.Model):
     pub_date = models.DateTimeField()
     content = models.TextField()
     image = models.URLField()
-    story_category = models.ManyToManyField(Category)
+    story_category = models.ManyToManyField(Category, related_name='stories')
     slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):

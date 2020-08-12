@@ -7,8 +7,8 @@ from django.template.defaultfilters import slugify
 class CustomUser(AbstractUser):
 
     profile_img = models.ImageField(upload_to='images', default="default.jpg")
-    bio = models.TextField(max_length=1000, default="This user hasn't written a bio yet!")
-    slug = models.SlugField(null=True)
+    bio = models.TextField(max_length=1000, blank=True, default='')
+    slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
         return self.username

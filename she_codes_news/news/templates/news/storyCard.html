@@ -6,7 +6,7 @@
             <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
             <h4>{{ story.pub_date }}</h4>
             {% for category in story.story_category.all %}
-            <small>{{ category }}</small>
+            <small><a href="{% url 'news:category-detail' category.slug %}">{{ category }}</a></small>
             {% endfor %}
         </div>
     </a>

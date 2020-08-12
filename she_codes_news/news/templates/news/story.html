@@ -14,7 +14,7 @@
     <h2>{{ story.title }}</h2>
     <h4>{{ story.author }}</h4>
     {% for category in story.story_category.all %}
-    <small>{{ category }}</small>
+    <small><a href="{% url 'news:category-detail' category.slug %}">{{ category }}</a></small>
     {% endfor %}
     <div id="story-content">
         <img src="{{ story.image }}">

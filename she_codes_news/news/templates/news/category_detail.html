@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- In this document, object = category -->
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'news/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>She Codes {{ object.category }} Stories</h2>
+
+    {% if object.stories.all %}
+        {% for story in object.stories.all %}
+        <div class="story-card" id="story-card-{{ position }}">
+            <a href="{% url 'news:story' story.slug %}">
+                <img src="{{ story.image }}" alt="{{ story.title }}">
+                <div class="story-card-text">
+                    <h3>{{ story.title }}</h3>
+                    <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
+                    <h4>{{ story.pub_date }}</h4>
+                </div>
+            </a>
+        </div>        
+        {% endfor %}
+    {% else %}
+        <p>There are no stories in this category yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

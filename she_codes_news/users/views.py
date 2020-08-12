@@ -25,7 +25,7 @@ class AuthorView(generic.DetailView):
 class UpdateAccountView(LoginRequiredMixin, generic.UpdateView):
     login_url = 'users/login/'
     model = CustomUser
-    fields = ['password', 'email', 'bio', 'profile_img']
+    fields = ['email', 'bio', 'profile_img']
     template_name = 'users/customuser_update.html'
 
     def get_success_url(self):
