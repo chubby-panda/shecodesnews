@@ -1,19 +1,21 @@
+<!-- Story Card -->
 <div class="story-card" id="story-card-{{ position }}">
     <a href="{% url 'news:story' story.slug %}">
-        {% if story.image %}
+        <!-- Story Image -->
         <img src="{{ story.image.url }}" alt="{{ story.title }}">
-        {% else %}
-        <img src="../media/default-story.jpeg" alt="{{ story.title }}">
-        {% endif %}
+
+        <!-- Story Content -->
         <div class="story-card-text">
-            <h3>{{ story.title }}</h3>
-            <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
-            <h4>{{ story.pub_date }}</h4>
+            <h3 class="story-card-headline">{{ story.title }}</h3>
+            <p>{{ story.pub_date }} | 
             {% for category in story.story_category.all %}
-            <small><a href="{% url 'news:category-detail' category.slug %}">{{ category }}</a></small>
+            <a class="category text-primary" href="{% url 'news:category-detail' category.slug %}">{{ category }}</a>
             {% endfor %}
+            </p>
+            <p>Written by <a class="text-primary" href="{% url 'users:author-detail' story.author.slug %}">{{ story.author.get_full_name|default:story.author.username }}</a></p>
+            <a class="btn-subtle" href="{% url 'news:story' story.slug %}">Read the story &nbsp;&nbsp <i class="fas fa-arrow-right text-secondary"></i></a>
         </div>
     </a>
-</div>
+</div>     
 
 

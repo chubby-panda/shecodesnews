@@ -2,17 +2,18 @@
 {% load static %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'news/styles.css' %}">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block content %}
-
-<h2>Create Account</h2>
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Account</button>
-</form>
+<div class="formpage-container">
+    <h2 class="section-lead">Create Account</h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Create Account</button>
+    </form>
+</div>
 
 {% endblock %}

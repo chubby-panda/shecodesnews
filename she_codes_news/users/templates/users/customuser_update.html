@@ -2,19 +2,22 @@
 {% load static %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'news/styles.css' %}">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Edit Account</h2>
+<div class="formpage-container">
+    <div class="form-function-buttons">
+        <a class="btn btn-primary" href="{% url 'users:author-detail' user.slug %}">Back to profile</a>
+    </div>
 
-    <a href="{% url 'users:author-detail' user.slug %}">Back to profile</a>
+    <h2 class="section-lead">Edit Account</h2>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Update Account</button>
+        <button class="btn btn-secondary" type="submit">Update Account</button>
     </form>
 </div>
 {% endblock %}
+ 

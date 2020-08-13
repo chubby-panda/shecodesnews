@@ -2,17 +2,21 @@
 {% load static %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'news:story' object.slug %}">Quit and return to story.</a>
-<h2>Update the Story</h2>
-
-<form id="form-container" action="" method="post">
-    {% csrf_token %}
-    <!-- This renders the form vv -->
-    {{ form.as_p }}
-    <input type="submit" value="SUBMIT">
-</form>
+<div class="formpage-container">
+    <div class="form-function-buttons">
+        <a class="btn btn-secondary" href="{% url 'news:story' object.slug %}">Quit and Return to Story.</a>
+    </div>
+    <h2 class="section-lead">Update the Story</h2>
+    
+    <form id="form-container" action="" method="post">
+        {% csrf_token %}
+        <!-- This renders the form vv -->
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+</div>
 {% endblock %}

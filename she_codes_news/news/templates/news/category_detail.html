@@ -4,7 +4,7 @@
 <!-- In this document, object = category -->
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'news/styles.css' %}">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,7 @@
         {% for story in object.stories.all %}
         <div class="story-card" id="story-card-{{ position }}">
             <a href="{% url 'news:story' story.slug %}">
-                <img src="{{ story.image }}" alt="{{ story.title }}">
+                <img src="{{ story.image.url }}" alt="{{ story.title }}">
                 <div class="story-card-text">
                     <h3>{{ story.title }}</h3>
                     <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>

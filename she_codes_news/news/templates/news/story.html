@@ -2,29 +2,37 @@
 {% load static %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'news/styles.css' %}">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<div id="story-wrapper">
+<div id="storypage-container">
     {% if user.is_authenticated and user == story.author %}
-    <a href="{% url 'news:edit-story' story.slug %}">Edit</a>
-    <a href="{% url 'news:delete-story' story.slug %}">Delete</a>
+    <div id="storypage-function-buttons">
+        <a class="btn btn-primary" href="{% url 'news:edit-story' story.slug %}">Edit Story</a>
+        <a class="btn btn-dark" href="{% url 'news:delete-story' story.slug %}">Delete</a>
+    </div>
     {% endif %}
-    <h2>{{ story.title }}</h2>
-    <h4>{{ story.author }}</h4>
+    <h2 class="section-lead">{{ story.title }}</h2>
+    <p>Written by <a class="text-primary" href="{% url 'users:author-detail' story.author.slug %}">{{ story.author.get_full_name|default:story.author.username }}</a></p>
     {% if story.mod_date %}
     <p>Originally published on {{ story.pub_date }}</p>
     <p>Last updated on {{ story.mod_date }}</p>
     {% else %}
     <p>Published on {{ story.pub_date }}</p>
     {% endif %}
+    <p>Categories: 
     {% for category in story.story_category.all %}
-    <small><a href="{% url 'news:category-detail' category.slug %}">{{ category }}</a></small>
+    <small><a class="text-primary" href="{% url 'news:category-detail' category.slug %}">{{ category }}</a></small>
     {% endfor %}
+    </p>
     <div id="story-content">
-        <img src="{{ story.image }}">
-        {{ story.content|linebreaks }}
+        <div id="story-image-box">
+            <img src="{{ story.image.url }}">
+        </div>
+        <div id="story-text">
+            {{ story.content|linebreaks }}
+        </div>
     </div>
 </div>
 {% endblock %}

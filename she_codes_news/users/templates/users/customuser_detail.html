@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'news/styles.css' %}">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
 
+<div id="profile-container">
+    <!-- Success Messages -->
     {% if messages %}
     <ul class="messages">
     {% for message in messages %}
@@ -16,33 +17,61 @@
     </ul>
     {% endif %}
     <br>
-    <h2>{{ object.username }}'s Profile</h2>
-    {% if user.is_authenticated and user == object %}
-    <a href="{% url 'users:author-update' user.slug %}">Edit profile information</a>
-    <a href="{% url 'users:change-password' user.slug %}">Change your password</a>
-    {% endif %}
-    <img class="profile-img" src="{{ object.profile_img.url }}" alt="Profile Image">
-    <p>Email: {{ object.email }}</p>
-    <h4>About {{ object.username }}:</h4>
-    <p>{{ object.bio }}</p>
-    {% if object %}
-        <h2>{{ object.get_full_name|default:object.username }}'s Stories</h2>
-        {% if objects.stories.all %}
+    
+    <!-- Profile Section -->
+    <section id="profile-section">
+        <img class="profile-img" src="{{ object.profile_img.url }}" alt="Profile Image">
+        <div id="profile-text">
+            <h2 class="lead">{{ object.get_full_name|default:object.username }}</h2>
+            <p>{{ object.bio }}</p>
+        </div>
+    </section>
+    
+    <!-- Edit Profile and Change Password Buttons -->
+    <div id="profile-function-buttons">
+        {% if user.is_authenticated and user == object %}
+        <a class="btn btn-primary" href="{% url 'users:author-update' user.slug %}"><i class="fas fa-chevron-right"></i> &nbsp;&nbsp Edit profile information</a>
+        <a class="btn btn-secondary" href="{% url 'users:change-password' user.slug %}"><i class="fas fa-chevron-right"></i> &nbsp;&nbsp Change your password</a>
+        {% else %}
+        <a class="btn btn-primary" href="mailto: {{ object.email }}">Email {{ object.first_name }}</a>
+        {% endif %}
+    </div>
+    
+    <!-- Author Stories Section -->
+    {% if object.stories.all %}
+    <section id="profile-stories-section">
+        {% if user == object %}
+        <h2 class="section-lead">Your Stories</h2>
+        {% else %}
+        <h2 class="section-lead">{{ object.first_name|default:object.username }}'s Stories</h2>
+        {% endif %}
+        <div id="profile-story-container">
             {% for story in object.stories.all %}
             <div class="story-card" id="story-card-{{ position }}">
                 <a href="{% url 'news:story' story.slug %}">
-                    <img src="{{ story.image }}" alt="{{ story.title }}">
+                    <!-- Story Image -->
+                    <img src="{{ story.image.url }}" alt="{{ story.title }}">
+            
+                    <!-- Story Content -->
                     <div class="story-card-text">
-                        <h3>{{ story.title }}</h3>
-                        <h4><a href="{% url 'users:author-detail' story.author.slug %}">{{ story.author }}</a></h4>
-                        <h4>{{ story.pub_date }}</h4>
+                        <h3 class="story-card-headline">{{ story.title }}</h3>
+                        <p>{{ story.pub_date }} | 
+                        {% for category in story.story_category.all %}
+                        <a class="category text-primary" href="{% url 'news:category-detail' category.slug %}">{{ category }}</a>
+                        {% endfor %}
+                        </p>
+                        <p>Written by <a class="text-primary" href="{% url 'users:author-detail' story.author.slug %}">{{ story.author.get_full_name|default:story.author.username }}</a></p>
+                        <a class="btn-subtle" href="{% url 'news:story' story.slug %}">Read the story &nbsp;&nbsp <i class="fas fa-arrow-right text-secondary"></i></a>
                     </div>
                 </a>
-            </div>        
+            </div>           
             {% endfor %}
+        </div>
+    
         {% else %}
         <p>{{ object.username }} hasn't written any stories yet.</p>
-        {% endif %}
+    </section>
     {% endif %}
 </div>
+
 {% endblock %}

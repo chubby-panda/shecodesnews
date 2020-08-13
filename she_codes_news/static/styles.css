@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 
+
+/* STYLE RESETS */
 * {
     padding: 0;
     margin: 0;
@@ -7,10 +9,34 @@
 }
 
 body {
-    background-color: rgb(240, 239, 239);
+    background-color: #fff;
     font-family: 'Raleway', sans-serif;
 }
 
+h1 {
+    text-decoration: none;
+    font-size: 4rem;
+    margin: 0;
+}
+
+a {
+    margin: 2px;
+    text-decoration: none;
+    color: #000;
+}
+
+p {
+    line-height: 1.6;
+    color: #555;
+}
+
+a, p {
+    font-size: 1.1rem;
+}
+
+/* BASE STYLING */
+
+/* Header */
 header {
     background-image: url(./she_codes_news/shecodes_banner.jpg);
     background-position: center;
@@ -41,7 +67,7 @@ header * {
 
 #header-container-top {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 50%;
     margin: 0 50px;
@@ -53,6 +79,15 @@ header * {
     justify-content: center;
     align-items: center;
     height: 50%;
+}
+
+.header-logo {
+    height: 120px;
+    width: 120px;
+}
+
+#header-text {
+    display: flex;
 }
 
 #page-heading {
@@ -69,6 +104,7 @@ header * {
     max-width: 600px;
 }
 
+/* Header-Navigation */
 header nav {
     display: flex;
     flex-direction: row;
@@ -87,37 +123,299 @@ nav a:hover {
     color: #F9A526;
 }
 
-h1 {
-    text-decoration: none;
-    font-size: 4rem;
-    margin: 0;
+/* Header-Searchbar */
+.searchbar {
+    height: 2rem;
+    width: 400px;
+    border-radius: 50px;
+    border: none;
+    padding: 5px 15px;
+    display: inline-block;
 }
 
-h3 {
-    font-size: 2rem;
-    margin: 0;
+.searchbar:focus {
+    border: none;
+    outline: none;
 }
 
-#header-text {
-    flex-basis: 80%;
+#search form {
+    height: 200px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
 }
 
-.header-logo {
-    height: 120px;
-    width: 120px;
-    margin-left: 100px;
-}
+/* UTILITY CLASSES (FOR REUSE) */
 
-nav {
-    flex-basis: 20%;
+/* Story Cards */
+.story-card {
+    margin: 2px;
+    background-color: #f4f4f4;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
 }
 
-a {
-    margin: 2px;
-    text-decoration: none;
-    color: #000;
+.story-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.story-card-text {
+    padding: 20px 30px;
+}
+
+.story-card-headline {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Images */
+.profile-img {
+    height: auto;
+    width: 250px;
+    object-fit: contain;
+}
+
+/* Text */
+.text-primary { color: #7A44A1; }
+.text-secondary { color: #F9A526; }
+
+/* Buttons */
+.btn-subtle {
+    display: inline-block;
+    padding: 15px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px;
+    background-color: #7A44A1;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover { background-color: #000; }
+
+.btn-primary { background-color: #7A44A1; }
+.btn-secondary { background-color: #F9A526; }
+.btn-dark { background-color: #000; }
+
+/* Headings */
+.lead {
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.section-lead {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+
+/* HOME PAGE */
+#home-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+#index-function-buttons {
+    width: 100%;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#index-function-buttons p {
+    align-self: center;
+    margin-right: 20px;
+}
+
+#latest-news-container {
+    padding: 30px 0 50px 0;
+}
+
+#latest-stories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px
+}
+
+#latest-stories .story-card:nth-child(2) {
+    flex-direction: column-reverse;
+}
+
+#all-news-container {
+    padding: 50px 0;
+}
+
+#all-stories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+#all-stories .story-card:nth-child(3n+2) {
+    flex-direction: column-reverse;
+}
+
+/* FORM PAGES */
+.formpage-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px 0 50px 0;
+}
+
+.form-function-buttons {
+    padding: 30px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 30px 0 50px 0;
+}
+
+form p {
+    display: flex;
+    margin: 10px 0;
+}
+
+form button[type=submit] {
+    flex-basis: content;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+    outline: none;
+    border: none;
+    width: fit-content;
+    align-self: center;
+    margin-top: 30px;
+}
+
+form p label {
+    flex-basis: 30%;
+}
+
+form p:nth-child(6) {
+    display: flex;
+    flex-direction: column;
+}
+
+form .helptext,
+form ul {
+    display: none;
+}
+
+form p input,
+form p input:focus, 
+form p input:active {
+    height: 2rem;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: 1px solid #333;
+    flex-basis: 70%;
+    outline: none;
+}
+
+form p textarea,
+form p textarea:focus,
+form p textarea:active {
+    outline: none;
+    flex-basis: 70%;
+    border: 1px solid #333;
+}
+
+form p input#id_pub_date_0,
+form p input#id_pub_date_1,
+form p input#id_mod_date_0,
+form p input#id_mod_date_1 {
+    flex-basis: 35%;
+}
+
+
+/* PROFILE PAGE */
+#profile-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+#profile-section {
+    padding: 50px 0;
+    display: flex; 
+}
+
+#profile-section #profile-text {
+    margin-left: 50px;
+}
+
+#profile-function-buttons {
+    display: flex; 
+    justify-content: flex-end;
+    padding-bottom: 50px;
+}
+
+#profile-function-buttons a {
+    margin: 0 10px;
+}
+
+#profile-stories-section {
+    padding: 50px 0;
+    border-top: 1px solid #ccc;
+}
+
+#profile-story-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* STORY PAGE */
+#storypage-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 50px 0;
+}
+
+#storypage-function-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+#story-content {
+    display: flex;
+    margin-top: 30px;
+}
+
+#story-text {
+    flex-basis: 50%;
+}
+
+#story-image-box {
+    flex-basis: 50%;
+    margin-right: 30px;
+}
+
+#story-image-box img {
+    width: 100%;
+}
+
+/* SEARCH RESULTS PAGE */
+#searchpage-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 50px 0;
+}
+
+#results-container .story-card-text {
+    padding: 5px;
+    background-color: #f4f4f4;
 }

@@ -1,9 +1,15 @@
 from django.views import generic
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
+
 from .models import NewsStory, Category
 from .forms import StoryForm, UpdateStoryForm
 
+
+def handler404(request, exception):
+    return render(request, '404.html', status=404)
 
 
 class AddStoryView(LoginRequiredMixin, generic.CreateView):
@@ -28,7 +34,7 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         """Filter the stories in the queryset to get only the latest five."""
         context = super().get_context_data(**kwargs)
-        context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
+        context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:3]
         context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')
         return context
 
@@ -69,3 +75,19 @@ class DeleteStoryView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteVie
     def test_func(self):
         """Only let the user access this page if they are the author of the object being deleted"""
         return self.get_object().author == self.request.user
+
+
+class SearchView(generic.TemplateView):
+    template_name = 'news/search.html'
+
+
+class SearchResultsView(generic.ListView):
+    model = NewsStory
+    template_name = 'news/searchResults.html'
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        qs =  NewsStory.objects.filter(
+            Q(content__icontains=query) | Q(title__icontains=query) | Q(author__username__icontains=query) | Q(story_category__category__icontains=query) | Q(author__first_name__icontains=query) | Q(author__last_name__icontains=query)
+            )
+        return qs.distinct

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Search Page</h1>
+<form action="{% url 'news:search-results' %}" method="GET">
+    <input name="q" type="text" placeholder="Search...">
+</form>
+
+{% endblock %}

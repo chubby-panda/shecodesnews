@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="searchpage-container">
+    <h2 class="lead">Search Results</h2>
+    <div id="results-container">
+        {% if object_list %}
+        {% for s in object_list %}
+        <a href="{% url 'news:story' s.slug %}">
+            <div class="story-card-text">
+                <h3 class="story-card-headline">{{ s.title }}</h3>
+                <p>{{ s.pub_date }} | 
+                {% for category in s.story_category.all %}
+                {{ category }}
+                {% endfor %}
+                </p>
+                <p>Written by {{ s.author.get_full_name|default:s.author.username }}</p>
+            </div>
+        </a>
+        {% endfor %}
+        {% else %}
+        <p>There are no items matching that search.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

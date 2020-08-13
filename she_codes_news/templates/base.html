@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
         {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     </head>
 
     <body>
@@ -21,14 +22,21 @@
                         <img class="header-logo" src="{% static 'she_codes_news/SheCodesNews_LOGO.png' %}" alt="She {Codes} News">
                     </a>
                 </div>
-                {% include './nav.html' %}
+                <div id="search">
+                    <form action="{% url 'news:search-results' %}" method="GET">
+                        <input class="searchbar" name="q" type="text" placeholder="Search...">
+                    </form>
+                </div>
+                <div class="nav">
+                    {% include './nav.html' %}
+                </div>
             </div>
             <div id="header-container-bottom">
                 <h1 id="page-heading">She {Codes} News</h1>
                 <p id="page-subheading">Find out all the latest news in the She Codes community!</p>
             </div>
         </header>
-
+        
         {% block content %}{% endblock %}
     </body>
 </html>

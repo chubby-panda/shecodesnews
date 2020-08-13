@@ -2,16 +2,20 @@
 {% load static %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'news:story' object.slug %}">Quit and return to story.</a>
-<h2>Delete Story</h2>
-
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete this post: "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-</form>
+<div class="formpage-container">
+    <div class="form-function-buttons">
+        <a class="btn btn-secondary" href="{% url 'news:story' object.slug %}">Quit and Return to Story.</a>
+    </div>
+    <h2>Delete Story</h2>
+    
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete this post: "{{ object }}"?</p>
+        <button class="btn btn-dark" type="submit">DELETE</button>
+    </form>
+</div>
 
 {% endblock %}

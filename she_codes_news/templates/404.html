@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h1>404</h1>
+<h2>Page not found</h2>
+<p>Oh no. Are you lost?</p>
+<p>The page you are looking for does not exist. It could have been moved or removed altogether. Maybe hop back to the site's homepage and see if you can find what you were looking for.</p>
+<a class="btn" href="{% url 'news:index' %}">Back to Homepage</a>
+
+
+{% endblock %}
