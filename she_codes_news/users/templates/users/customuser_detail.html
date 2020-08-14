@@ -23,7 +23,7 @@
         <img class="profile-img" src="{{ object.profile_img.url }}" alt="Profile Image">
         <div id="profile-text">
             <h2 class="lead">{{ object.get_full_name|default:object.username }}</h2>
-            <p>{{ object.bio }}</p>
+            <p>{{ object.bio | linebreaks }}</p>
         </div>
     </section>
     

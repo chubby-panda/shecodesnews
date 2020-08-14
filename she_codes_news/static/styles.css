@@ -159,7 +159,7 @@ nav a:hover {
 
 .story-card img {
     width: 100%;
-    height: 300px;
+    height: auto;
     object-fit: cover;
 }
 
@@ -201,6 +201,7 @@ nav a:hover {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+    width: fit-content;
 }
 
 .btn:hover { background-color: #000; }
@@ -288,7 +289,7 @@ form ul {
 .formpage-container {
     max-width: 900px;
     margin: auto;
-    padding: 20px 0 50px 0;
+    padding: 20px 20px 50px 20px;
 }
 
 .form-function-buttons {
@@ -322,11 +323,6 @@ form button[type=submit] {
 form p label {
     flex-basis: 30%;
 }
-
-/* form p:nth-child(6) {
-    display: flex;
-    flex-direction: column;
-} */
 
 form .helptext {
     display: none;
@@ -404,7 +400,7 @@ form p input#id_mod_date_1 {
 #storypage-container {
     max-width: 900px;
     margin: auto;
-    padding: 50px 0;
+    padding: 50px 20px;
 }
 
 #storypage-function-buttons {
@@ -510,7 +506,7 @@ form p input#id_mod_date_1 {
 #searchpage-container {
     max-width: 900px;
     margin: auto;
-    padding: 50px 0;
+    padding: 50px 20px;
 }
 
 #results-container .story-card-text {
@@ -522,5 +518,131 @@ form p input#id_mod_date_1 {
 #category-container {
     max-width: 900px;
     margin: auto;
-    padding: 50px 0;
+    padding: 50px 20px;
+}
+
+@media screen and (max-width:992px) {
+    #header-container-top,
+    #index-function-buttons,
+    #profile-section,
+    #story-info,
+    #story-content,
+    form p {
+        flex-direction: column;
+    }
+
+    h1, h2, h3 {
+        text-align: center;
+    }
+
+    a, p {
+        font-size: 1.3rem;
+    }
+
+    header {
+        height: 100vh;
+    }
+
+    .searchbar {
+        height: 3rem;
+    }
+
+    #page-heading,
+    #page-subheading {
+        margin-bottom: 15px;
+    }
+
+    #page-heading {
+        font-size: 2.8rem;
+    }
+
+    #page-subheading {
+        font-size: 1.4rem;
+    }
+
+    #search form {
+        height: fit-content;
+    }
+
+    #index-function-buttons {
+        align-items: center;
+    }
+
+    #index-function-buttons p {
+        margin-bottom: 20px;
+    }
+
+    #latest-stories,
+    #all-stories,
+    #profile-story-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #latest-stories .story-card:nth-child(2), #all-stories .story-card:nth-child(3n+2) {
+        flex-direction: column;
+    }
+
+    #profile-section #profile-text {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    #profile-section img {
+        align-self: center;
+        margin-bottom: 30px;
+    }
+
+    #profile-function-buttons {
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #profile-function-buttons a {
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    #storypage-function-buttons {
+        justify-content: center;
+    }
+
+    #storypage-function-buttons a {
+        font-size: 1rem;
+    }
+
+    #story-content {
+        text-align: center;
+    }
+
+    #story-image-box {
+        margin-right: 0;
+    }
+
+    /* form {
+        text-align: center;
+    } */
+
+    form p label {
+        margin-bottom: 10px;
+    }
+
+    form button[type=submit] {
+        align-self: center;
+        margin-top: 15px;
+    }
+
+    #results-container {
+        text-align: center;
+    }
+
+    form input,
+    form textarea {
+        font-size: 1.5rem;
+    }
+
+    form textarea {
+        width: 100%;
+    }
 }
