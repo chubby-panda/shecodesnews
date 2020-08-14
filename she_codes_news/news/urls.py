@@ -10,9 +10,11 @@ urlpatterns = [
     path('search/results/', views.SearchResultsView.as_view(), name='search-results'),
     path('add-story/', views.AddStoryView.as_view(), name='newsStory'),
     path('category/<slug:slug>/', views.CategoryView.as_view(), name='category-detail'),
-    path('<slug:slug>/', views.StoryView.as_view(), name='story'),
+    path('<slug:slug>/', views.story_detail, name='story'),
     path('<slug:slug>/edit-story/', views.UpdateStoryView.as_view(), name='edit-story'),
     path('<slug:slug>/delete-story/', views.DeleteStoryView.as_view(), name='delete-story'),
+    path('<slug:slug>/<int:pk>/remove-comment', views.remove_comment, name='remove-comment'),
+    path('<slug:slug>/<int:pk>/approve-comment', views.approve_comment, name='approve-comment'),
 ]
 
 handler404 = views.handler404

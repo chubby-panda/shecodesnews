@@ -2,7 +2,7 @@ from django import forms
 from django.utils import timezone
 from django.forms import ModelForm, SplitDateTimeField, SplitDateTimeWidget
 
-from .models import NewsStory, Category
+from .models import NewsStory, Category, Comment
 
 class StoryForm(ModelForm):
     pub_date = SplitDateTimeField(
@@ -30,6 +30,13 @@ class StoryForm(ModelForm):
                 queryset = Category.objects.all()
             ),
         }
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)
+        labels = {'content': "Leave a comment",}
 
 
 class UpdateStoryForm(ModelForm):

@@ -30,8 +30,9 @@
     <!-- Edit Profile and Change Password Buttons -->
     <div id="profile-function-buttons">
         {% if user.is_authenticated and user == object %}
-        <a class="btn btn-primary" href="{% url 'users:author-update' user.slug %}"><i class="fas fa-chevron-right"></i> &nbsp;&nbsp Edit profile information</a>
-        <a class="btn btn-secondary" href="{% url 'users:change-password' user.slug %}"><i class="fas fa-chevron-right"></i> &nbsp;&nbsp Change your password</a>
+        <a class="btn btn-secondary" href="{% url 'news:newsStory' %}">Write New Story</a>
+        <a class="btn btn-primary" href="{% url 'users:author-update' user.slug %}"><i class="fas fa-chevron-right"></i> &nbsp;&nbsp Edit profile</a>
+        <a class="btn btn-primary" href="{% url 'users:change-password' user.slug %}"><i class="fas fa-chevron-right"></i> &nbsp;&nbsp Change password</a>
         {% else %}
         <a class="btn btn-primary" href="mailto: {{ object.email }}">Email {{ object.first_name }}</a>
         {% endif %}

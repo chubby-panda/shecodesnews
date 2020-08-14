@@ -1,11 +1,13 @@
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db.models import Q
 
-from .models import NewsStory, Category
-from .forms import StoryForm, UpdateStoryForm
+from .models import NewsStory, Category, Comment
+from .forms import StoryForm, UpdateStoryForm, CommentForm
 
 
 def handler404(request, exception):
@@ -39,10 +41,45 @@ class IndexView(generic.ListView):
         return context
 
 
-class StoryView(generic.DetailView):
-    model = NewsStory
+def story_detail(request, slug):
     template_name = 'news/story.html'
-    context_object_name = 'story'
+    story = get_object_or_404(NewsStory, slug=slug)
+    comments = story.comments.all()
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid() and request.user.is_authenticated:
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current story to the comment
+            new_comment.story = story
+            new_comment.name = request.user
+            # Save the comment to the database
+            new_comment.save()
+        else:
+            messages.error(request, 'Please login or register to leave a comment.')
+    else:
+        comment_form = CommentForm()
+
+    return render(request, template_name, {'story': story,
+                                           'comments': comments,
+                                           'new_comment': new_comment,
+                                           'comment_form': comment_form})
+
+@login_required
+def approve_comment(request, pk, slug):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('news:story', slug=slug)
+
+
+@login_required
+def remove_comment(request, pk, slug):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.user == comment.name or request.user == comment.story.author:
+        comment.delete()
+    return redirect('news:story', slug=slug)
 
 
 class CategoryView(generic.DetailView):

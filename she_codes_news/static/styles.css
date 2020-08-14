@@ -183,6 +183,11 @@ nav a:hover {
 .text-primary { color: #7A44A1; }
 .text-secondary { color: #F9A526; }
 
+/* Icons */
+.fas:hover {
+    color: #F9A526;
+}
+
 /* Buttons */
 .btn-subtle {
     display: inline-block;
@@ -215,6 +220,21 @@ nav a:hover {
     margin-bottom: 30px;
 }
 
+/* Messages */
+.messages,
+form ul {
+    list-style: none;
+    padding: 15px;
+    background-color: #F9A526;
+    margin: auto;
+    text-align: center;
+    width: fit-content;
+    margin-bottom: 30px;
+}
+
+.messages li {
+    font-size: 1rem;
+}
 
 /* HOME PAGE */
 #home-container {
@@ -284,7 +304,8 @@ form {
 
 form p {
     display: flex;
-    margin: 10px 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
 }
 
 form button[type=submit] {
@@ -294,7 +315,7 @@ form button[type=submit] {
     outline: none;
     border: none;
     width: fit-content;
-    align-self: center;
+    align-self: flex-end;
     margin-top: 30px;
 }
 
@@ -302,13 +323,12 @@ form p label {
     flex-basis: 30%;
 }
 
-form p:nth-child(6) {
+/* form p:nth-child(6) {
     display: flex;
     flex-direction: column;
-}
+} */
 
-form .helptext,
-form ul {
+form .helptext {
     display: none;
 }
 
@@ -330,6 +350,9 @@ form p textarea:active {
     outline: none;
     flex-basis: 70%;
     border: 1px solid #333;
+    padding: 10px;
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.5;
 }
 
 form p input#id_pub_date_0,
@@ -390,6 +413,20 @@ form p input#id_mod_date_1 {
     margin-bottom: 30px;
 }
 
+#story-info {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+}
+
+#story-info p,
+#story-info a,
+#story-info small {
+    font-size: 0.8rem;
+}
+
 #story-content {
     display: flex;
     margin-top: 30px;
@@ -408,6 +445,67 @@ form p input#id_mod_date_1 {
     width: 100%;
 }
 
+#comments-section {
+    margin: 100px 0;
+    padding: 30px;
+    background-color: #7A44A1;
+}
+
+#comments-section h2,
+#comments-section label,
+#comments-section .alert {
+    color: #fff;
+}
+
+#comments-section form textarea {
+    border: 2px solid #888;
+    padding: 10px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+#comments {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    margin: 20px 0;
+    padding: 30px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.comment .meta-comment-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment .comment-info {
+    margin-top: 10px;
+    align-self: flex-start;
+    justify-self: flex-end;
+}
+
+.comment p.comment-info,
+.comment .comment-info a {
+    font-size: 0.8rem;
+}
+
+.comment .icons {
+    display: flex;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+.comment .icons a {
+    margin: 0 5px;
+}
+
+
 /* SEARCH RESULTS PAGE */
 #searchpage-container {
     max-width: 900px;
@@ -418,4 +516,11 @@ form p input#id_mod_date_1 {
 #results-container .story-card-text {
     padding: 5px;
     background-color: #f4f4f4;
+}
+
+/* CATEGORY PAGE */
+#category-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 50px 0;
 }

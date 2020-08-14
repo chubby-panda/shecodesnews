@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>She Codes {{ object.category }} Stories</h2>
+<div id="category-container">
+    <h2 class="section-lead">{{ object.category }} Stories</h2>
 
     {% if object.stories.all %}
         {% for story in object.stories.all %}

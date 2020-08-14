@@ -52,3 +52,26 @@ class NewsStory(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+    @property
+    def approved_comments(self):
+        return self.comments.filter(approved=True)
+        
+
+
+class Comment(models.Model):
+    story = models.ForeignKey(NewsStory, on_delete=models.CASCADE, related_name='comments')
+    name = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField(max_length=200)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-pub_date']
+
+    def __str__(self):
+        return f"Comment [{self.content}] by {self.name}."
+
+    def approve(self):
+        self.approved = True
+        self.save()
